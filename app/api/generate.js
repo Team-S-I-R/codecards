@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import OpenAI from 'openai'
 
 const systemPrompt = `
@@ -16,8 +17,12 @@ You should return in the following JSON format:
 `
 
 export async function POST(req) {
-   const openai = new OpenAI()
-   const data = await req.text()
+   // const openai = new OpenAI()
+   // const data = await req.text()
+
+   const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
+   const data = await req.json() // Parse the JSON body of the incoming request
  
    // const completion = await openai.chat.completions.create({
    //   messages: [
@@ -27,9 +32,13 @@ export async function POST(req) {
    //   model: 'gpt-4o',
    //   response_format: { type: 'json_object' },
    // })
+
+   const completion = await model.generateContent({
+      contents: [{role: 'user', parts: [{text: systemPrompt}]}, {role: 'user', parts: [{text: data}]}],
+    })
  
    // Parse the JSON response from the OpenAI API
-   const flashcards = JSON.parse(completion.choices[0].message.content)
+   const flashcards = JSON.parse(completion.response.text)
  
    // Return the flashcards as a JSON response
    return NextResponse.json(flashcards.flashcards)
