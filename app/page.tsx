@@ -1,3 +1,5 @@
+'use client';
+
 import Image from "next/image";
 import {
   Typography,
@@ -31,7 +33,7 @@ export default function Home() {
   };
 
   return (
-    <Container maxWidth="100vw">
+    <Container maxWidth={false}>
       <Head>
         <title> CODECARDS </title>
         <meta name="description" content="Create flashcard from your text" />
@@ -123,7 +125,7 @@ export default function Home() {
                 {' '}
                 Lorem Ipsum
               </Typography>
-              <Button variant="contained" color="primary" sx={{mt: 2}}>
+              <Button onClick={handleSubmit} variant="contained" color="primary" sx={{mt: 2}}>
                 Choose Basic
               </Button>
             </Box>
@@ -141,8 +143,8 @@ export default function Home() {
                 {' '}
                 Lorem Ipsum
               </Typography>
-              <Button variant="contained" color="primary" sx={{mt: 2}}>
-                Choose Basic
+              <Button onClick={handleSubmit} variant="contained" color="primary" sx={{mt: 2}}>
+                Choose Pro
               </Button>
             </Box>
           </Grid>
