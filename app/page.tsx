@@ -6,8 +6,6 @@ import {
   Button,
   AppBar,
   Toolbar,
-  Box,
-  Grid,
   Container,
 } from "@mui/material";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
@@ -33,162 +31,119 @@ export default function Home() {
   };
 
   return (
-    <Container maxWidth={false}>
+    <div className="w-full h-screen overflow-y-scroll no-scrollbar bg-slate-900 text-green-400">
+      
       <Head>
-        <title> CODECARDS </title>
+        <title>CodeCards</title>
         <meta name="description" content="Create flashcard from your text" />
       </Head>
 
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" style={{ flexGrow: 1 }}>
-            Flashcard SaaS
-          </Typography>
-          <SignedOut>
-            <Button color="inherit" href="/sign-in">
-              Login
-            </Button>
-            <Button color="inherit" href="/sign-up">
-              Sign Up
-            </Button>
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-        </Toolbar>
-      </AppBar>
+      <header className="w-full h-max flex p-5 bg-slate-800 place-items-center justify-between">
+        <Typography variant="h6" style={{ flexGrow: 1 }}>
+          Flashcard SaaS
+        </Typography>
+        <SignedOut>
+          <Button color="inherit" href="/sign-in">
+            Login
+          </Button>
+          <Button color="inherit" href="/sign-up">
+            Sign Up
+          </Button>
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+      </header>
 
-      <Box sx={{ textAlign: "center", my: 4 }}>
+
+<div className="w-full h-full flex place-items-center place-content-center">
+     
+      {/* left */}
+      <div className="flex flex-col place-items-center place-content-center">
+        {/* feature */}
+        <Typography className="my-6" variant="h4" component="h2" gutterBottom>
+          Features
+        </Typography>
+
+        <div className="my-6 w-max  place-items-center place-content-center flex flex-col">
+          <div className="w-1/2 my-4 p-4 flex flex-col  rounded">
+            <Typography variant="h6">Easy Text Input</Typography>
+            <Typography>Simply inout your txt and let our softweare do the rest. Creating 
+              flashcards has never been easier
+            </Typography>
+          </div>
+          <div className="w-1/2 my-4 p-4 flex flex-col rounded">
+            <Typography variant="h6">Smart Flashcards</Typography>
+            <Typography>
+              Our AI intelligently breaks down your text into concise
+              flashcards
+            </Typography>
+          </div>
+          <div className="w-1/2 my-4 p-4 flex flex-col rounded">
+            <Typography variant="h6">Accessible Anywhere</Typography>
+            <Typography>
+              Lorem Ipsum
+            </Typography>
+          </div>
+        </div>
+      </div>
+
+      {/* right */}
+      <div className="flex flex-col place-items-center place-content-center my-4 w-full">
         <Typography variant="h2" component="h1" gutterBottom>
-          Welcome to Flashcard SaaS
+          Welcome to Codecards
         </Typography>
         <Typography variant="h5" component="h2" gutterBottom>
           The easiest way to create flashcards from your text.
         </Typography>
         <Button
           variant="contained"
-          color="primary"
-          sx={{ mt: 2, mr: 2 }}
+          className="mt-2 bg-green-400 hover:bg-green-500 text-slate-900 font-bold"
           href="/generate"
         >
           Get Started
         </Button>
-        <Button variant="outlined" color="primary" sx={{ mt: 2 }}>
+        <Button variant="outlined" className="mt-2 border-green-400 hover:border-green-500 text-green-400">
           Learn More
         </Button>
-      </Box>
+      </div>
 
-      <Box sx={{ my: 6 }}>
-        <Typography variant="h4" component="h2" gutterBottom>
-          Features
-        </Typography>
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={4}>
-            <Typography variant="h6">Easy Text Input</Typography>
-            <Typography>{' '}Simply inout your txt and let our softweare do the rest. Creating 
-              flashcards has never been easier
-            </Typography>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Typography variant="h6">Smart Flashcards</Typography>
-            <Typography>
-              {' '}
-              Our AI intelligently breaks down your text into concise
-              flashcards
-            </Typography>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Typography variant="h6">Accessible Anywhere</Typography>
-            <Typography>
-              {' '}
-              Lorem Ipsum
-            </Typography>
-          </Grid>
-        </Grid>
-      </Box>
+</div>
 
-      <Box sx={{ my: 6, textAlign: "center" }}>
+       {/* pricing  */}
+      <div className="my-6 py-8 text-center w-full flex flex-col">
         <Typography variant="h4" component="h2" gutterBottom>
           Pricing
         </Typography>
-        <Grid container spacing={4} justifyContent="center">
-          <Grid item xs={12} md={6}>
-            <Box sx={{
-              p:3,
-              border: '1px solid',
-              borderColor: 'grey.300',
-              borderRadius: 2
-            }}>
-              <Typography variant="h5" gutterBottom>Basic</Typography>
-              <Typography variant="h6" gutterBottom>$5 / month</Typography>
-              <Typography>
-                {' '}
-                Lorem Ipsum
-              </Typography>
-              <Button onClick={handleSubmit} variant="contained" color="primary" sx={{mt: 2}}>
-                Choose Basic
-              </Button>
-            </Box>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Box sx={{
-              p:3,
-              border: '1px solid',
-              borderColor: 'grey.300',
-              borderRadius: 2
-            }}>
-              <Typography variant="h5" gutterBottom>Pro</Typography>
-              <Typography variant="h6" gutterBottom>$10 / month</Typography>
-              <Typography>
-                {' '}
-                Lorem Ipsum
-              </Typography>
-              <Button onClick={handleSubmit} variant="contained" color="primary" sx={{mt: 2}}>
-                Choose Pro
-              </Button>
-            </Box>
-          </Grid>
-        </Grid>
-      </Box>
+        <div className="w-full flex place-content-center justify-evenly">
+          <div className="p-3 rounded">
+            <Typography variant="h5" gutterBottom>Basic</Typography>
+            <Typography variant="h6" gutterBottom>$5 / month</Typography>
+            <Typography>
+              Lorem Ipsum
+            </Typography>
+            <Button onClick={handleSubmit} variant="contained" className="mt-2 bg-green-400 hover:bg-green-500 text-slate-900 font-bold">
+              Choose Basic
+            </Button>
+          </div>
+          <div className="p-3 rounded">
+            <Typography variant="h5" gutterBottom>Pro</Typography>
+            <Typography variant="h6" gutterBottom>$10 / month</Typography>
+            <Typography>
+              Lorem Ipsum
+            </Typography>
+            <Button onClick={handleSubmit} variant="contained" className="mt-2 bg-green-400 hover:bg-green-500 text-slate-900 font-bold">
+              Choose Pro
+            </Button>
+          </div>
+        </div>
+      </div>
 
-    </Container>
+      {/* footer */}
+      <footer className="w-full h-max flex p-5 bg-slate-800">
 
-    // <main className="w-full h-screen bg-slate-900 text-green-300">
+      </footer>
 
-    //   <div className="w-full h-full overflow-y-scroll">
-
-    //   {/* <section className="w-full h-full">
-    //     <div className="w-full h-full flex sm:flex-row flex-col place-content-center place-items-center">
-
-    //       <div className="sm:w-1/2 sm:h-full w-full h-1/2 flex place-content-center place-items-center">
-    //         <h1>Image will go here</h1>
-    //       </div>
-
-    //       <div className="sm:w-1/2 sm:h-full w-full h-1/2 flex flex-col place-content-center place-items-center">
-    //         <h1>CodeCards</h1>
-    //         <h1>Landing Page text</h1>
-    //       </div>
-
-    //     </div>
-    //   </section> */}
-
-    //   {/* <section className="w-full h-full">
-    //     <div className="w-full h-full flex sm:flex-row flex-col place-content-center place-items-center">
-
-    //       <div className="sm:w-1/2 sm:h-full w-full h-1/2 flex place-content-center place-items-center">
-    //         <h1>Image will go here</h1>
-    //       </div>
-
-    //       <div className="sm:w-1/2 sm:h-full w-full h-1/2 flex flex-col place-content-center place-items-center">
-    //         <h1>CodeCards</h1>
-    //         <h1>Landing Page text</h1>
-    //       </div>
-
-    //     </div>
-    //   </section> */}
-
-    //   </div>
-
-    // </main>
+    </div>
   );
 }
