@@ -31,7 +31,7 @@ export default function Home() {
   };
 
   return (
-    <Container maxWidth="100v">
+    <Container maxWidth="100vw">
       <Head>
         <title> CODECARDS </title>
         <meta name="description" content="Create flashcard from your text" />
