@@ -86,12 +86,12 @@ export default function Generate() {
   };
 
   return (
-    <Container maxWidth="md">
-      <Box sx={{ mt: 4, mb: 6, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <div className="w-full h-full">
+      <div className="text-green-400 bg-slate-900 p-4 w-screen h-screen">
         <Typography variant="h4" component="h1" gutterBottom>
           Generate Flashcards
         </Typography>
-        <TextField
+        <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
           label="Enter text"
@@ -99,27 +99,29 @@ export default function Generate() {
           multiline
           rows={4}
           variant="outlined"
+          className="w-full text-green-400 bg-slate-900 outline-transparent border-transparent"
           sx={{ mb: 2 }}
         />
+
         <Button
           variant="contained"
-          color="primary"
+          className="bg-green-400 text-slate-900 hover:bg-green-500 font-bold" 
           onClick={handleSubmit}
           fullWidth
         >
           Generate Flashcards
         </Button>
-      </Box>
+      </div>
 
       {flashcards.length > 0 && (
-        <Box sx={{ mt: 4 }}>
+        <div sx={{ mt: 4 }}>
           <Typography variant="h5" component="h2" gutterBottom>
             Generated Flashcards
           </Typography>
           <Grid container spacing={2}>
             {flashcards.map((flashcard, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
-                <Card>
+                <div>
                   <CardActionArea
                      onClick={() => handleCardClick(index)}
                   >
@@ -165,15 +167,15 @@ export default function Generate() {
                         </Box>
                      </CardContent>
                   </CardActionArea>
-                </Card>
+                </div>
               </Grid>
             ))}
           </Grid>
-        </Box>
+        </div>
       )}
 
       {flashcards.length > 0 && (
-        <Box sx={{ mt: 4, display: "flex", justifyContent: "center" }}>
+        <div sx={{ mt: 4, display: "flex", justifyContent: "center" }}>
           <Button
             variant="contained"
             color="primary"
@@ -181,7 +183,7 @@ export default function Generate() {
           >
             Save Flashcards
           </Button>
-        </Box>
+        </div>
       )}
 
       <Dialog open={dialogOpen} onClose={handleCloseDialog}>
@@ -207,6 +209,6 @@ export default function Generate() {
           </Button>
         </DialogActions>
       </Dialog>
-    </Container>
+    </div>
   );
 }

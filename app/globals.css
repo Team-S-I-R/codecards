@@ -82,3 +82,7 @@
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+*:focus {
+  outline: none;
+}

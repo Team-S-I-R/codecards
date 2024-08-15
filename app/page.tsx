@@ -8,9 +8,9 @@ import {
   Toolbar,
   Container,
 } from "@mui/material";
-import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import getStripe from "../utils/get-stripe";
 import Head from "next/head";
+import FcHeader from "./fc-components/header";
 
 export default function Home() {
   const handleSubmit = async () => {
@@ -38,28 +38,12 @@ export default function Home() {
         <meta name="description" content="Create flashcard from your text" />
       </Head>
 
-      <header className="w-full h-max flex p-5 bg-slate-800 place-items-center justify-between">
-        <Typography variant="h6" style={{ flexGrow: 1 }}>
-          Flashcard SaaS
-        </Typography>
-        <SignedOut>
-          <Button color="inherit" href="/sign-in">
-            Login
-          </Button>
-          <Button color="inherit" href="/sign-up">
-            Sign Up
-          </Button>
-        </SignedOut>
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
-      </header>
-
+      <FcHeader />
 
 <div className="w-full h-full flex place-items-center place-content-center">
      
       {/* left */}
-      <div className="flex flex-col place-items-center place-content-center">
+      <div className="flex w-1/2 flex-col place-items-center place-content-center">
         {/* feature */}
         <Typography className="my-6" variant="h4" component="h2" gutterBottom>
           Features
@@ -89,7 +73,7 @@ export default function Home() {
       </div>
 
       {/* right */}
-      <div className="flex flex-col place-items-center place-content-center my-4 w-full">
+      <div className="flex text-center flex-col place-items-center place-content-center my-4 w-1/2">
         <Typography variant="h2" component="h1" gutterBottom>
           Welcome to Codecards
         </Typography>
@@ -111,7 +95,7 @@ export default function Home() {
 </div>
 
        {/* pricing  */}
-      <div className="my-6 py-8 text-center w-full flex flex-col">
+      <div className="my-6 py-8 h-[50vh] text-center w-full flex flex-col">
         <Typography variant="h4" component="h2" gutterBottom>
           Pricing
         </Typography>
@@ -140,7 +124,7 @@ export default function Home() {
       </div>
 
       {/* footer */}
-      <footer className="w-full h-max flex p-5 bg-slate-800">
+      <footer className="w-full h-[30vh] flex p-5 bg-slate-800">
 
       </footer>
 
