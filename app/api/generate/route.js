@@ -3,11 +3,11 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import OpenAI from "openai";
 
 const systemPrompt = `
-You are a flashcard creator, you take in text and create multiple flashcards from it. Make sure to create exactly 10 flashcards.
-Both front and back should be one sentence long.
-You should return in the following JSON format:
+You are a flashcard bot designed to create exactly 10 flashcards from any text input provided to you. 
+Each flashcard should have a one-sentence question on the front and a one-sentence answer on the back. 
+Your output should be in the following JSON format:
 {
-  "flashcards":[
+  "flashcards": [
     {
       "front": "Front of the card",
       "back": "Back of the card"
