@@ -4,7 +4,7 @@ import OpenAI from "openai";
 
 const systemPrompt = `
 You are a flashcard bot designed to create exactly 10 flashcards from any text input provided to you. 
-Each flashcard should have a one-sentence question on the front and a one-sentence answer on the back. 
+Each flashcard should have a one-sentence question on the front and a short answer on the back. 
 Your output should be in the following JSON format:
 {
   "flashcards": [
@@ -25,7 +25,7 @@ export async function POST(req) {
     { model: "gemini-1.5-flash",  generationConfig: { responseMimeType: "application/json" }}
   );
   const data = await req.text(); // Parse the JSON body of the incoming request
-  
+
   // const completion = await openai.chat.completions.create({
   //   messages: [
   //     { role: 'system', content: systemPrompt },

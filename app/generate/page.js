@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { useUser } from '@clerk/nextjs'
-import db from '@/firebase'
-import { useRouter } from "next/router";
+import {db} from '@/firebase'
+import { useRouter } from "next/navigation";
 import { doc, collection, setDoc, getDoc, writeBatch } from "firebase/firestore";
 import { Container, TextField, Button, Typography, Box, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Grid, Card, CardContent, CardActionArea } from "@mui/material";
 import FcHeader from "../fc-components/header";
@@ -17,6 +17,7 @@ export default function Generate() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const handleOpenDialog = () => setDialogOpen(true);
   const handleCloseDialog = () => setDialogOpen(false);
+  const router = useRouter();
 
   const handleCardClick = (id) => {
    setFlipped((prev) => ({
@@ -31,7 +32,7 @@ export default function Generate() {
       return;
     }
 
-   //  try {
+    try {
       const userDocRef = doc(collection(db, "users"), user.id);
       const userDocSnap = await getDoc(userDocRef);
 
@@ -56,11 +57,13 @@ export default function Generate() {
       alert("Flashcards saved successfully!");
       handleCloseDialog();
       setSetName("");
-   //  } catch (error) {
-   //    console.error("Error saving flashcards:", error);
-   //    alert("An error occurred while saving flashcards. Please try again.");
-   //  }
-  };
+      router.push(`/flashcards`);
+
+    } catch (error) {
+      console.error("Error saving flashcards:", error);
+      alert("An error occurred while saving flashcards. Please try again.");
+    }
+   };
 
   const handleSubmit = async () => {
     if (!text.trim()) {
@@ -80,7 +83,7 @@ export default function Generate() {
 
       const data = await response.json();
       setFlashcards(data);
-      console.log(flashcards);
+      // console.log(flashcards);
     } catch (error) {
       console.error("Error generating flashcards:", error);
       alert("An error occurred while generating flashcards. Please try again1.");
@@ -106,8 +109,7 @@ export default function Generate() {
           value={text}
           onChange={(e) => setText(e.target.value)}
           label="Enter text"
-          fullWidth
-          multiline
+          multiline="true"
           rows={4}
           variant="outlined"
           placeholder="Enter your text here"
