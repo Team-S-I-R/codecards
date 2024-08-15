@@ -118,7 +118,7 @@ export default function Generate() {
         />
 
         <button
-          className="bg-white w-full p-2 rounded hover:scale-105 transition-transform text-zinc-900 hover:bg-white font-bold" 
+          className="bg-white w-full p-3 rounded hover:scale-105 transition-transform text-zinc-900 hover:bg-white font-bold" 
           onClick={handleSubmit}
           fullWidth
         >

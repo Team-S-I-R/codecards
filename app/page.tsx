@@ -112,7 +112,7 @@ export default function Home() {
 
   useGSAP(() => {
   
-    const tl = gsap.timeline({paused: false}) 
+    const tl = gsap.timeline() 
 
     tl.set(['#header-cont', '#bottom-cont'],{
       opacity: 0,
@@ -171,17 +171,17 @@ export default function Home() {
 
           {/* buttons */}
           <div className="w-max gap-5 flex h-max">
+            <a href="/generate">
           <button
             id="f5"
             className="mt-4 p-3 rounded bg-white hover:bg-white text-zinc-900 font-bold transform hover:scale-110 transition-transform"
           >
             <span id="f6">
-              <a href="/generate">
 
               Get Started
-              </a>
             </span>
           </button>
+          </a>
           <button
             id="f7"
             className="mt-4 p-3 rounded outline outline-1 outline-whitetext-white transform hover:scale-105 transition-transform"
@@ -297,13 +297,13 @@ export default function Home() {
             </Typography>
             </div>
 
+            <a className="w-full" href="/generate">
             <button
-              className="mt-4 py-2 px-4 rounded  bg-white hover:bg-white text-zinc-900 font-bold"
+              className="mt-4 w-full py-2 px-4 rounded  bg-white hover:bg-white text-zinc-900 font-bold"
             >
-              <a href="/generate">
                 GET STARTED
-                </a>
             </button>
+            </a>
 
           </div>
           {/* basic */}
