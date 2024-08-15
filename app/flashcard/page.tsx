@@ -6,16 +6,26 @@ import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import {db} from '@/firebase'
 import { useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
+import FcHeader from "../fc-components/header";
+
+type Flashcard = {
+  id: string;
+  name: string;
+  front: string;
+  back: string;
+  // Add other properties if needed
+};
 
 export default function Flashcard() {
    const { isLoaded, isSignedIn, user } = useUser()
-   const [flashcards, setFlashcards] = useState([])
-   const [flipped, setFlipped] = useState({})
+   const [fcName, setFcName] = useState('')
+   const [flashcards, setFlashcards] = useState<Flashcard[]>([])
+   const [flipped, setFlipped] = useState<{[key: string]: boolean}>({})
  
    const searchParams = useSearchParams()
    const search = searchParams.get('id')
 
-   const handleCardClick = (id) => {
+   const handleCardClick = (id: string) => {
       setFlipped((prev) => ({
         ...prev,
         [id]: !prev[id],
@@ -32,25 +42,36 @@ export default function Flashcard() {
     
         const colRef = doc(collection(doc(collection(db, 'users'), user.id), "flashcardSets"), search)
         const docs = await getDoc(colRef)
+        console.log(docs)
         
-        const flashcards = []
-        docs.data().flashcards.forEach((doc, i) => {
+        const flashcards: Flashcard[] = []
+        docs.data()?.flashcards.forEach((doc: any, i: number) => {
           flashcards.push({ id: i, ...doc })
         })
         setFlashcards(flashcards)
+        setFcName(docs.id)
       }
       getFlashcard()
     }, [search, user])
 
     return (
-      <Container maxWidth="md">
-        <Grid container spacing={3} sx={{ mt: 4 }}>
+      <div className="bg-zinc-900 w-full h-screen overflow-y-scroll no-scrollbar">
+       <FcHeader />
+
+        <div className="w-full select-none h-max p-8">
+        <div className="px-8 my-[100px]">
+          <p className="text-2xl font-bold text-white">{fcName}</p>
+          <p className="text-muted-foreground">Get to studying!</p>
+        </div>
+
+        <div className="text-white w-full h-max grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {flashcards.map((flashcard) => (
-            <Grid item xs={12} sm={6} md={4} key={flashcard.id}>
-              <Card>
-                <CardActionArea onClick={() => handleCardClick(flashcard.id)}>
+            <div className="bg-zinc-900 " key={flashcard.id}>
+              <Card className="single-div w-full !text-white ">
+                <CardActionArea className="bg-zinc-900" onClick={() => handleCardClick(flashcard.id)}>
                   <CardContent>
-                    <Box sx={{
+                    <Box 
+                    sx={{
                               perspective: `1000px`,
                               '& > div': {
                                  transition: 'transform 0.6s',
@@ -83,7 +104,7 @@ export default function Flashcard() {
                             {flashcard.front}
                           </Typography>
                         </div>
-                        <div>
+                        <div className="flex w-full h-full overflow-y-scroll no-scrollbar">
                           <Typography variant="h5" component="div">
                             {flashcard.back}
                           </Typography>
@@ -93,9 +114,21 @@ export default function Flashcard() {
                   </CardContent>
                 </CardActionArea>
               </Card>
-            </Grid>
+            </div>
           ))}
-        </Grid>
-      </Container>
+        </div>
+          
+        </div>
+
+        <footer className="w-full h-[20vh] flex p-5 bg-zinc-900  text-center text-muted-foreground">
+        <div className="w-full flex flex-col justify-center items-center">
+          <Typography variant="body1">Codecards 2024</Typography>
+          <Typography variant="body2">
+            Made with love by Shaurya Bisht, Itwela Ibomu, and Rehan Mohideen
+          </Typography>
+        </div>
+    </footer>
+    
+      </div>
     )
  }

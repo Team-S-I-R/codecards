@@ -89,3 +89,7 @@
 *:focus {
   outline: none;
 }
+
+.sign-up-div, .fc-page-div, .single-div {
+  background-color: #18181b !important;
+}
