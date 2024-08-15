@@ -96,12 +96,12 @@ export default function Generate() {
 
   return (
     <>
-    <div className="w-full h-screen overflow-y-scroll no-scrollbar">
-    <div className="w-full bg-zinc-900 h-screen overflow-y-scroll no-scrollbar">
+    <div className="w-full h-screen  overflow-y-scroll no-scrollbar">
+    <div className="bg-zinc-900 h-screen overflow-y-scroll no-scrollbar">
       
       <FcHeader />
 
-      <div className="text-white no-scrollbar bg-zinc-900 p-8 w-screen h-max overflow-y-scroll">
+      <div className="text-white no-scrollbar bg-zinc-900 p-8 h-max overflow-y-scroll">
         <Typography variant="h4" component="h1" gutterBottom>
           Generate Flashcards
         </Typography>
@@ -204,7 +204,7 @@ export default function Generate() {
 
         <div className="bg-zinc-900 my-8 flex place-content-center h-[30vh]" sx={{ display: "flex", justifyContent: "center" }}>
         
-          <button className="bg-white h-[40px] text-zinc-900 hover:bg-white font-bold"  onClick={handleReset}>
+          <button onClick={handleOpenDialog} className="bg-white h-[40px] text-zinc-900 hover:bg-white font-bold" >
           Save Flashcards
           </button>
         </div>

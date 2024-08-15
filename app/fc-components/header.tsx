@@ -12,7 +12,8 @@ import {
 export default function FcHeader() {
     return (
         <>
-        <header className="hidden sm:flex rounded-lg w-full bg-zinc-900/70 backdrop-blur-md text-white h-max flex p-5 place-items-center justify-between">
+        <header className="hidden sm:flex rounded-lg w-full bg-zinc-900/70 backdrop-blur-md text-white h-max flex p-5 place-items-center place-content-center">
+        <div className="w-1/2 flex place-items-center justify-between">
         <Typography variant="h6" style={{ flexGrow: 1 }}>
           <a href="/">
           <span>  
@@ -33,13 +34,14 @@ export default function FcHeader() {
         <SignedIn>
           <UserButton />
         </SignedIn>
+        </div>
         </header>
 
         <header className="sm:hidden rounded-lg w-full bg-zinc-900/70 backdrop-blur-md text-white h-max flex p-5 place-items-center justify-between">
         <Typography variant="h6" style={{ flexGrow: 1 }}>
           <a href="/">
             <span className="text-sm">  
-            Flashcard SaaS
+            Codecards
             </span>
             </a>
         </Typography>

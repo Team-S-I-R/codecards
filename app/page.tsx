@@ -268,7 +268,7 @@ export default function Home() {
       </div>
 
       {/* Pricing Section */}
-      <div className="w-full h-max bg-gradient-to-r from-[#09090b] to-[#27272a] ">
+      <div className="w-full px-9 h-max bg-gradient-to-r from-[#09090b] to-[#27272a] ">
     
       <div className="py-6 p-8 h-max sn:h-[50vh]  w-full flex flex-col">
         <Typography
