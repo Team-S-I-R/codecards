@@ -6,6 +6,7 @@ import db from '@/firebase'
 import { useRouter } from "next/router";
 import { doc, collection, setDoc, getDoc, writeBatch } from "firebase/firestore";
 import { Container, TextField, Button, Typography, Box, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Grid, Card, CardContent, CardActionArea } from "@mui/material";
+import FcHeader from "../fc-components/header";
 
 export default function Generate() {
    const {isLoaded, isSignedIn, user} = useUser()
@@ -79,6 +80,7 @@ export default function Generate() {
 
       const data = await response.json();
       setFlashcards(data);
+      console.log(flashcards);
     } catch (error) {
       console.error("Error generating flashcards:", error);
       alert("An error occurred while generating flashcards. Please try again1.");
@@ -86,8 +88,13 @@ export default function Generate() {
   };
 
   return (
-    <div className="w-full h-full">
-      <div className="text-green-400 bg-slate-900 p-4 w-screen h-screen">
+    <>
+    <div className="w-full h-screen overflow-y-scroll no-scrollbar">
+    <div className="w-full bg-slate-900 h-screen overflow-y-scroll no-scrollbar">
+      
+      <FcHeader />
+
+      <div className="text-green-400 no-scrollbar bg-slate-900 p-4 w-screen h-max overflow-y-scroll">
         <Typography variant="h4" component="h1" gutterBottom>
           Generate Flashcards
         </Typography>
@@ -99,7 +106,7 @@ export default function Generate() {
           multiline
           rows={4}
           variant="outlined"
-          className="w-full text-green-400 bg-slate-900 outline-transparent border-transparent"
+          className="w-full no-scrollbar text-green-400 bg-slate-900 outline-transparent border-transparent"
           sx={{ mb: 2 }}
         />
 
@@ -111,10 +118,23 @@ export default function Generate() {
         >
           Generate Flashcards
         </Button>
+
+        {/* {flashcards.map((flashcard, index) => (
+                <div>
+                <div>
+                  <Typography variant="h5">{flashcard.front}</Typography>
+                </div>
+                <div>
+                  <Typography variant="h5">{flashcard.back}</Typography>
+                </div>
+            </div>
+       
+            ))} */}
+
       </div>
 
       {flashcards.length > 0 && (
-        <div sx={{ mt: 4 }}>
+        <div className="text-green-400 bg-slate-900 p-4" sx={{ mt: 4 }}>
           <Typography variant="h5" component="h2" gutterBottom>
             Generated Flashcards
           </Typography>
@@ -156,10 +176,10 @@ export default function Generate() {
                         >
                            
                            <div>
-                              <div>
+                              <div className="">
                                  <Typography variant="h5">{flashcard.front}</Typography>
                               </div>
-                              <div>
+                              <div className="overflow-y-scroll no-scrollbar">
                                  <Typography variant="h5">{flashcard.back}</Typography>
                               </div>
                            </div>
@@ -175,14 +195,12 @@ export default function Generate() {
       )}
 
       {flashcards.length > 0 && (
-        <div sx={{ mt: 4, display: "flex", justifyContent: "center" }}>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleOpenDialog}
-          >
-            Save Flashcards
-          </Button>
+
+        <div className="bg-slate-900 my-8 flex place-content-center h-[30vh]" sx={{ display: "flex", justifyContent: "center" }}>
+        
+          <button className="bg-green-400 h-[40px] text-slate-900 hover:bg-green-500 font-bold"  onClick={handleReset}>
+          Save Flashcards
+          </button>
         </div>
       )}
 
@@ -209,6 +227,18 @@ export default function Generate() {
           </Button>
         </DialogActions>
       </Dialog>
+
+
     </div>
+      <footer className="w-full h-[20vh] flex p-5 bg-slate-800 text-center text-green-400">
+        <div className="w-full flex flex-col justify-center items-center">
+          <Typography variant="body1">Codecards 2024</Typography>
+          <Typography variant="body2">
+            Made with love by Shaurya Bisht, Itwela Ibomu, and Rehan Mohideen
+          </Typography>
+        </div>
+      </footer>
+    </div>
+      </>
   );
 }

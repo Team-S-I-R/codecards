@@ -12,9 +12,11 @@ import {
 export default function FcHeader() {
     return (
         <>
-              <header className="w-full h-max flex p-5 bg-slate-800 place-items-center justify-between">
+              <header className="w-full text-green-400 h-max flex p-5 bg-slate-800 place-items-center justify-between">
         <Typography variant="h6" style={{ flexGrow: 1 }}>
-          Flashcard SaaS
+          <a href="/">
+            Flashcard SaaS
+            </a>
         </Typography>
         <SignedOut>
           <Button color="inherit" href="/sign-in">
