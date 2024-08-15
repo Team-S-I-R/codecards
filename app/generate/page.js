@@ -87,14 +87,18 @@ export default function Generate() {
     }
   };
 
+  const handleReset = () => {
+  }
+
+
   return (
     <>
     <div className="w-full h-screen overflow-y-scroll no-scrollbar">
-    <div className="w-full bg-slate-900 h-screen overflow-y-scroll no-scrollbar">
+    <div className="w-full bg-zinc-900 h-screen overflow-y-scroll no-scrollbar">
       
       <FcHeader />
 
-      <div className="text-green-400 no-scrollbar bg-slate-900 p-4 w-screen h-max overflow-y-scroll">
+      <div className="text-white no-scrollbar bg-zinc-900 p-8 w-screen h-max overflow-y-scroll">
         <Typography variant="h4" component="h1" gutterBottom>
           Generate Flashcards
         </Typography>
@@ -106,18 +110,18 @@ export default function Generate() {
           multiline
           rows={4}
           variant="outlined"
-          className="w-full no-scrollbar text-green-400 bg-slate-900 outline-transparent border-transparent"
+          placeholder="Enter your text here"
+          className="w-full no-scrollbar text-white bg-zinc-900 outline-transparent border-transparent"
           sx={{ mb: 2 }}
         />
 
-        <Button
-          variant="contained"
-          className="bg-green-400 text-slate-900 hover:bg-green-500 font-bold" 
+        <button
+          className="bg-white w-full p-2 rounded hover:scale-105 transition-transform text-zinc-900 hover:bg-white font-bold" 
           onClick={handleSubmit}
           fullWidth
         >
           Generate Flashcards
-        </Button>
+        </button>
 
         {/* {flashcards.map((flashcard, index) => (
                 <div>
@@ -134,7 +138,7 @@ export default function Generate() {
       </div>
 
       {flashcards.length > 0 && (
-        <div className="text-green-400 bg-slate-900 p-4" sx={{ mt: 4 }}>
+        <div className="text-white bg-zinc-900 p-4" sx={{ mt: 4 }}>
           <Typography variant="h5" component="h2" gutterBottom>
             Generated Flashcards
           </Typography>
@@ -196,16 +200,16 @@ export default function Generate() {
 
       {flashcards.length > 0 && (
 
-        <div className="bg-slate-900 my-8 flex place-content-center h-[30vh]" sx={{ display: "flex", justifyContent: "center" }}>
+        <div className="bg-zinc-900 my-8 flex place-content-center h-[30vh]" sx={{ display: "flex", justifyContent: "center" }}>
         
-          <button className="bg-green-400 h-[40px] text-slate-900 hover:bg-green-500 font-bold"  onClick={handleReset}>
+          <button className="bg-white h-[40px] text-zinc-900 hover:bg-white font-bold"  onClick={handleReset}>
           Save Flashcards
           </button>
         </div>
       )}
 
-      <Dialog open={dialogOpen} onClose={handleCloseDialog}>
-        <DialogTitle>Save Flashcard Set</DialogTitle>
+      <Dialog className="p-4 m-4" open={dialogOpen} onClose={handleCloseDialog}>
+        <DialogTitle className="p-2">Save Flashcard Set</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Please enter a name for your flashcard set.
@@ -230,14 +234,14 @@ export default function Generate() {
 
 
     </div>
-      <footer className="w-full h-[20vh] flex p-5 bg-slate-800 text-center text-green-400">
+    <footer className="w-full h-[20vh] flex p-5 bg-zinc-900  text-center text-muted-foreground">
         <div className="w-full flex flex-col justify-center items-center">
           <Typography variant="body1">Codecards 2024</Typography>
           <Typography variant="body2">
             Made with love by Shaurya Bisht, Itwela Ibomu, and Rehan Mohideen
           </Typography>
         </div>
-      </footer>
+    </footer>
     </div>
       </>
   );
