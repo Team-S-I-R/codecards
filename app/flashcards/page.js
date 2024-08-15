@@ -1,3 +1,12 @@
+'use client'
+
+import { useUser } from "@clerk/nextjs";
+import { useEffect, useState } from "react";
+import {db} from '@/firebase'
+import { collection, doc, getDoc, setDoc } from "firebase/firestore";
+import { useRouter } from "next/navigation";
+import { Card, CardActionArea, CardContent, Container, Grid, Typography } from "@mui/material";
+
 export default function Flashcard() {
   const { isLoaded, isSignedIn, user } = useUser();
   const [flashcards, setFlashcards] = useState([]);
@@ -13,14 +22,19 @@ export default function Flashcard() {
       const docRef = doc(collection(db, "users"), user.id);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        const collections = docSnap.data().flashcards || [];
+        const collections = docSnap.data().flashcardSets || [];
         setFlashcards(collections);
+        console.log(docSnap.data());
       } else {
-        await setDoc(docRef, { flashcards: [] });
+        await setDoc(docRef, { flashcardSets: [] });
       }
     }
     getFlashcards();
   }, [user]);
+
+  if (!isLoaded || !isSignedIn) {
+    return <></>
+  }
 
   return (
     <Container maxWidth="md">

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useUser } from '@clerk/nextjs'
-import db from '@/firebase'
+import {db} from '@/firebase'
 import { useRouter } from "next/router";
 import { doc, collection, setDoc, getDoc, writeBatch } from "firebase/firestore";
 import { Container, TextField, Button, Typography, Box, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Grid, Card, CardContent, CardActionArea } from "@mui/material";
@@ -102,12 +102,11 @@ export default function Generate() {
           value={text}
           onChange={(e) => setText(e.target.value)}
           label="Enter text"
-          fullWidth
-          multiline
+          multiline="true"
           rows={4}
           variant="outlined"
           className="w-full no-scrollbar text-green-400 bg-slate-900 outline-transparent border-transparent"
-          sx={{ mb: 2 }}
+          sx={{ mb: 2, width:'100%' }}
         />
 
         <Button
@@ -198,9 +197,9 @@ export default function Generate() {
 
         <div className="bg-slate-900 my-8 flex place-content-center h-[30vh]" sx={{ display: "flex", justifyContent: "center" }}>
         
-          <button className="bg-green-400 h-[40px] text-slate-900 hover:bg-green-500 font-bold"  onClick={handleReset}>
+          <Button variant="contained" className="bg-green-400 h-[40px] text-slate-900 hover:bg-green-500 font-bold"  onClick={handleOpenDialog}>
           Save Flashcards
-          </button>
+          </Button>
         </div>
       )}
 
