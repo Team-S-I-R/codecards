@@ -24,7 +24,6 @@ export default function Flashcard() {
       if (docSnap.exists()) {
         const collections = docSnap.data().flashcardSets || [];
         setFlashcards(collections);
-        console.log(docSnap.data());
       } else {
         await setDoc(docRef, { flashcardSets: [] });
       }

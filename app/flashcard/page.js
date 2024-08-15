@@ -30,13 +30,12 @@ export default function Flashcard() {
       async function getFlashcard() {
         if (!search || !user) return
     
-        const colRef = collection(doc(collection(db, 'users'), user.id), search)
-        const docs = await getDocs(colRef)
-        console.log(docs)
+        const colRef = doc(collection(doc(collection(db, 'users'), user.id), "flashcardSets"), search)
+        const docs = await getDoc(colRef)
+        
         const flashcards = []
-        docs.forEach((doc) => {
-          console.log(doc)
-          flashcards.push({ id: doc.id, ...doc.data() })
+        docs.data().flashcards.forEach((doc, i) => {
+          flashcards.push({ id: i, ...doc })
         })
         setFlashcards(flashcards)
       }
@@ -51,7 +50,33 @@ export default function Flashcard() {
               <Card>
                 <CardActionArea onClick={() => handleCardClick(flashcard.id)}>
                   <CardContent>
-                    <Box sx={{ /* Styling for flip animation */ }}>
+                    <Box sx={{
+                              perspective: `1000px`,
+                              '& > div': {
+                                 transition: 'transform 0.6s',
+                                 transformStyle: 'preserve-3d',
+                                 position: 'relative',
+                                 width: '100%',
+                                 height: '200px',
+                                 boxShadow: '0 4px 8px 0 rgba(0,0,0,0,2)',
+                                 transform: flipped[flashcard.id] ? 'rotateY(180deg)' : 'rotateY(0deg)',
+                              },
+                              '& > div > div': {
+                                 position: 'absolute',
+                                 width: '100%',
+                                 height: '100%',
+                                 backfaceVisibility: 'hidden',
+                                 display: 'flex',
+                                 justifyContent: 'center',
+                                 alignItems: 'center',
+                                 padding: 2,
+                                 boxSizing: 'border-box',
+                              },
+                              '& > div > div:nth-of-type(2)': {
+                                 transform: 'rotateY(180deg)',
+                              }
+                           }}
+                          >
                       <div>
                         <div>
                           <Typography variant="h5" component="div">
