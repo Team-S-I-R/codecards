@@ -115,7 +115,7 @@ export default function Home() {
     const tl = gsap.timeline({paused: false}) 
 
     tl.set(['#header-cont', '#bottom-cont'],{
-      y: 10000,
+      opacity: 0,
     })
 
     tl.to('#overlay', {
@@ -126,7 +126,7 @@ export default function Home() {
 
 
     tl.to(['#header-cont', '#bottom-cont'],{
-      y: 0,
+      opacity: 1,
       stagger: 0.2,
       duration: 1,
       ease: "power1.out",
