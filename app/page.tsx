@@ -32,7 +32,6 @@ export default function Home() {
 
   return (
     <div className="w-full h-screen overflow-y-scroll no-scrollbar bg-slate-900 text-green-400">
-      
       <Head>
         <title>CodeCards</title>
         <meta name="description" content="Create flashcard from your text" />
@@ -92,7 +91,36 @@ export default function Home() {
         </Button>
       </div>
 
-</div>
+        {/* right */}
+        <div className="flex flex-col place-items-start place-content-start w-1/3 ml-10">
+          <Typography className="mb-4" variant="h4" component="h2" gutterBottom>
+            Features
+          </Typography>
+
+          <div className="space-y-4">
+            <div className="p-4 flex flex-col rounded bg-slate-800">
+              <Typography variant="h6">Easy Text Input</Typography>
+              <Typography>
+                Simply input your text and let our software do the rest. Creating
+                flashcards has never been easier.
+              </Typography>
+            </div>
+            <div className="p-4 flex flex-col rounded bg-slate-800">
+              <Typography variant="h6">Smart Flashcards</Typography>
+              <Typography>
+                Our AI intelligently breaks down your text into concise
+                flashcards.
+              </Typography>
+            </div>
+            <div className="p-4 flex flex-col rounded bg-slate-800">
+              <Typography variant="h6">Accessible Anywhere</Typography>
+              <Typography>
+                Access your flashcards from any device, anywhere, at any time.
+              </Typography>
+            </div>
+          </div>
+        </div>
+      </div>
 
        {/* pricing  */}
       <div className="my-6 py-8 h-[50vh] text-center w-full flex flex-col">
@@ -101,22 +129,34 @@ export default function Home() {
         </Typography>
         <div className="w-full flex place-content-center justify-evenly">
           <div className="p-3 rounded">
-            <Typography variant="h5" gutterBottom>Basic</Typography>
-            <Typography variant="h6" gutterBottom>$5 / month</Typography>
-            <Typography>
-              Lorem Ipsum
+            <Typography variant="h5" gutterBottom>
+              Basic
             </Typography>
-            <Button onClick={handleSubmit} variant="contained" className="mt-2 bg-green-400 hover:bg-green-500 text-slate-900 font-bold">
+            <Typography variant="h6" gutterBottom>
+              $5 / month
+            </Typography>
+            <Typography>Lorem Ipsum</Typography>
+            <Button
+              onClick={handleSubmit}
+              variant="contained"
+              className="mt-2 bg-green-400 hover:bg-green-500 text-slate-900 font-bold"
+            >
               Choose Basic
             </Button>
           </div>
           <div className="p-3 rounded">
-            <Typography variant="h5" gutterBottom>Pro</Typography>
-            <Typography variant="h6" gutterBottom>$10 / month</Typography>
-            <Typography>
-              Lorem Ipsum
+            <Typography variant="h5" gutterBottom>
+              Pro
             </Typography>
-            <Button onClick={handleSubmit} variant="contained" className="mt-2 bg-green-400 hover:bg-green-500 text-slate-900 font-bold">
+            <Typography variant="h6" gutterBottom>
+              $10 / month
+            </Typography>
+            <Typography>Lorem Ipsum</Typography>
+            <Button
+              onClick={handleSubmit}
+              variant="contained"
+              className="mt-2 bg-green-400 hover:bg-green-500 text-slate-900 font-bold"
+            >
               Choose Pro
             </Button>
           </div>
