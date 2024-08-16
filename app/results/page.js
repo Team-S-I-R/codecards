@@ -14,6 +14,24 @@ const ResultPage = () => {
   const [session, setSession] = useState(null);
   const [error, setError] = useState(null);
 
+  const handleSubmit = async (model) => {
+    const checkoutSession = await fetch("/api/checkout_sessions", {
+      method: "POST",
+      headers: { origin: "http://localhost:3000"},
+      body: JSON.stringify({model: model})
+    });
+    const checkoutSessionJson = await checkoutSession.json();
+
+    const stripe = await getStripe();
+    const { error } = await stripe.redirectToCheckout({
+      sessionId: checkoutSessionJson.id,
+    });
+
+    if (error) {
+      console.warn(error.message);
+    }
+  };
+
   useEffect(() => {
     const fetchCheckoutSession = async () => {
       if (!session_id) return;
@@ -67,7 +85,7 @@ const ResultPage = () => {
 
         {session.payment_status === "paid" ? (
           <>
-            <div className="w-screen h-screen flex flex-col place-items-center place-content-center text-white">
+            <div className="w-screen h-screen flex flex-col place-items-center place-content-center gap-4 text-white">
             <Typography variant="h4">Thank you for your purchase!</Typography>
             <Box sx={{ mt: 2 }}>
               <Typography variant="body1">
@@ -75,17 +93,40 @@ const ResultPage = () => {
                 order details shortly.
               </Typography>
             </Box>
+            <div className="w-full flex gap-4 place-content-center place-items-center">
+        
+              <a href="/generate">
+              <button className="bg-zinc-800 hover:bg-zinc-700 text-white hover:text-black hover:scale-105 rounded-lg px-4 py-2" >
+                Generate 
+              </button>
+              </a>
+
+              <a href="/">
+              <button className="bg-zinc-800 hover:bg-zinc-700 text-white hover:text-black hover:scale-105 rounded-lg px-4 py-2">
+                Home
+              </button>
+              </a>
+              
+            </div>
             </div>
           </>
         ) : (
           <>
-            <div className="w-screen h-screen flex flex-col place-items-center place-content-center text-white">
+            <div className="w-screen h-screen flex flex-col place-items-center place-content-center gap-4 text-white">
             <Typography variant="h4">Payment failed</Typography>
             <Box sx={{ mt: 2 }}>
               <Typography variant="body1">
                 Your payment was not successful. Please try again.
               </Typography>
             </Box>
+            <div className="w-full flex gap-4 place-content-center place-items-center">
+            <button onClick={() => handleSubmit("basic")} className="bg-zinc-800 hover:bg-zinc-700 text-white hover:text-black hover:scale-105 rounded-lg px-4 py-2" >
+              Try Basic Plan
+            </button>
+            <button onClick={() => handleSubmit("pro")} className="bg-zinc-800 hover:bg-zinc-700 text-white hover:text-black hover:scale-105 rounded-lg px-4 py-2">
+              Try Pro Plan
+            </button>
+            </div>
           </div>
           </>
         )}

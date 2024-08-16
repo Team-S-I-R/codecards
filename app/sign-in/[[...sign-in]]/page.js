@@ -8,6 +8,8 @@ export default function SignInPage() {
     <>
       <FcHeader />
 
+      <div className="w-full h-[100px]"></div>
+
       <Container maxWidth="sm">
         <Box
           display="flex"

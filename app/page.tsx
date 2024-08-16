@@ -185,14 +185,18 @@ export default function Home() {
             </span>
           </button>
           </a>
+          <a 
+          href="/about"
+          className="w-max h-max">
           <button
             id="f7"
             className="mt-4 p-3 rounded outline outline-1 outline-whitetext-white transform hover:scale-105 transition-transform"
-          >
+            >
             <span id="f8">
               Learn More
               </span>
           </button>
+            </a>
           </div>
         
         </div>
