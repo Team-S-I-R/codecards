@@ -70,7 +70,6 @@ const ResultPage = () => {
             <div className="w-screen h-screen flex flex-col place-items-center place-content-center text-white">
             <Typography variant="h4">Thank you for your purchase!</Typography>
             <Box sx={{ mt: 2 }}>
-              <Typography variant="h6">Session ID: {session_id}</Typography>
               <Typography variant="body1">
                 We have received your payment. You will receive an email with the
                 order details shortly.

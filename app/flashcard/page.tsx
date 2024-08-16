@@ -7,6 +7,7 @@ import {db} from '@/firebase'
 import { useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import FcHeader from "../fc-components/header";
+import { useRouter } from "next/navigation";
 
 type Flashcard = {
   id: string;
@@ -21,7 +22,8 @@ export default function Flashcard() {
    const [fcName, setFcName] = useState('')
    const [flashcards, setFlashcards] = useState<Flashcard[]>([])
    const [flipped, setFlipped] = useState<{[key: string]: boolean}>({})
- 
+   const router = useRouter()
+
    const searchParams = useSearchParams()
    const search = searchParams.get('id')
 
@@ -52,7 +54,7 @@ export default function Flashcard() {
 
 
     if (!isLoaded || !isSignedIn) {
-      return <></>
+      router.push('/sign-in')
     }
  
 

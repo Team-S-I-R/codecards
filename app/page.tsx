@@ -10,6 +10,8 @@ import { stories } from "./hpdata";
 import { gsap } from "gsap";
 import { useEffect, useRef, useState } from "react";
 import { useGSAP } from '@gsap/react'
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+
 
 export default function Home() {
   const handleSubmit = async () => {

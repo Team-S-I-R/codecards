@@ -9,7 +9,7 @@ import { Container, TextField, Button, Typography, Box, Dialog, DialogTitle, Dia
 import FcHeader from "../fc-components/header";
 
 export default function Generate() {
-   const {isLoaded, isSignedIn, user} = useUser()
+  const {isLoaded, isSignedIn, user} = useUser()
   const [text, setText] = useState("");
   const [flashcards, setFlashcards] = useState([]);
   const [flipped, setFlipped] = useState([]);
@@ -93,6 +93,9 @@ export default function Generate() {
   const handleReset = () => {
   }
 
+  if (!isSignedIn) {
+    router.push('/sign-in')
+  }
 
   return (
     <>

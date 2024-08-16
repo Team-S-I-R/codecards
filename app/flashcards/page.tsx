@@ -39,12 +39,7 @@ export default function Flashcard() {
   }, [user]);
 
   if (!isLoaded || !isSignedIn) {
-    return (
-      <>
-      <div><p>please sign in</p></div>
-    </>
-
-    )
+    router.push('/sign-in')
   }
 
   return (
