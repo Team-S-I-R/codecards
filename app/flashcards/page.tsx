@@ -1,11 +1,11 @@
-'use client'
+'use client';
 
 import { useUser } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
-import {db} from '@/firebase'
+import { db } from '@/firebase';
 import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
-import { Card, CardActionArea, CardContent, Container, Grid, Typography } from "@mui/material";
+import { Card, CardActionArea, CardContent, Container, Grid, Typography, Box } from "@mui/material";
 import FcHeader from "../fc-components/header";
 
 type Flashcard = {
@@ -49,28 +49,56 @@ export default function Flashcard() {
 
   return (
     <>
-    <div className="fc-page-div w-full h-screen">
-      <FcHeader/>
+      <div className="fc-page-div w-full h-screen bg-black overflow-y-scroll no-scrollbar">
+        <FcHeader />
 
-      <div className="w-full h-max p-8">
-         <span className="text-2xl font-bold text-white">
-          Your Flashcards
-          </span> 
-      </div>
+        <Container className="p-8">
+          <Typography variant="h4" component="h1" gutterBottom className="text-white">
+            Your Flashcards
+          </Typography>
 
-      <div className="w-full h-max  p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {flashcards.map((flashcard: Flashcard,  index) => (
-          <div className="w-full h-max " key={index}>
-            <div 
-            onClick={() => handleCardClick(flashcard.name)}
-            className="cursor-pointer hover:scale-105 transform transition w-full h-max p-4 text-white outline outline-2 outline-white rounded-lg">
-              <p>{flashcard.name}</p>
-            </div>
+          {flashcards.length > 0 ? (
+            <Grid container spacing={2}>
+              {flashcards.map((flashcard: Flashcard, index) => (
+                <Grid item xs={12} sm={6} md={4} key={index}>
+                  <CardActionArea onClick={() => handleCardClick(flashcard.name)}>
+                    <CardContent>
+                      <Box
+                        sx={{
+                          height: '200px',
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          backgroundColor: '#1c1c1c',
+                          borderRadius: 2,
+                          boxShadow: 3
+                        }}
+                      >
+                        <Typography variant="h6" className="text-white">
+                          {flashcard.name}
+                        </Typography>
+                      </Box>
+                    </CardContent>
+                  </CardActionArea>
+                </Grid>
+              ))}
+            </Grid>
+          ) : (
+            <Typography variant="h6" component="p" className="text-white">
+              No flashcards found.
+            </Typography>
+          )}
+        </Container>
+
+        <footer className="w-full h-[20vh] flex p-5 bg-black text-center text-muted-foreground">
+          <div className="w-full flex flex-col justify-center items-center">
+            <Typography variant="body1">Codecards 2024</Typography>
+            <Typography variant="body2">
+              Made with love by Shaurya Bisht, Itwela Ibomu, and Rehan Mohideen
+            </Typography>
           </div>
-        ))}
+        </footer>
       </div>
-
-    </div>
     </>
   );
 }
