@@ -9,6 +9,8 @@ export default function About() {
     <>
       <FcHeader />
 
+      <div className='w-full h-[100px]'></div>
+
       <Container maxWidth="lg" sx={{ marginTop: '100px', marginBottom: '50px' }}>
         <Box sx={{ textAlign: 'center', mb: 8 }}>
           <Typography variant="h4" gutterBottom sx={{ color: 'white' }}>
