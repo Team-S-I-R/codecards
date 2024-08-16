@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/api/checkout_sessions.js", "app/fc-components/header.jsx", "app/generate/page.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/api/checkout_sessions.js", "app/fc-components/header.jsx", "app/generate/page.js", "app/api/transcript/route.js"],
   "exclude": ["node_modules"]
 }

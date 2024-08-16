@@ -1,45 +1,48 @@
 import { NextResponse } from 'next/server';
 import axios from 'axios';
+import { summarizeText } from '../summarize/route';
+import { youtubeDl } from "youtube-dl-exec";
+import { AssemblyAI } from 'assemblyai';
+import { YoutubeTranscript } from 'youtube-transcript';
 
-const ASSEMBLYAI_API_KEY= process.env.ASSEMBLYAI_API_KEY;
+const ak= process.env.ASSEMBLYAI_API_KEY;
+const aaiClient = new AssemblyAI({ baseURL: 'https://api.assemblyai.com/v2', apiKey: ak });
+
+async function magic(videoUrl) {
+  console.log("videoUrl: ", videoUrl);
+  try {
+    const return_value = await YoutubeTranscript.fetchTranscript(videoUrl);
+    // Concatenate text values from the transcript data
+    if (return_value && Array.isArray(return_value)) {
+      const concatenatedText = return_value.map(item => item.text).join(' ');
+      return concatenatedText;
+    } else {
+      throw new Error('Invalid transcript data');
+    }
+  } catch (error) {
+    console.error('Failed to get transcript:', error);
+    throw error;  // Ensure errors are propagated
+  }
+}
 
 async function getYoutubetrancript(videoUrl) {
   try {
-    const response = await axios.post('https://api.assemblyai.com/v2/transcript', {
-      audio_url: videoUrl,
-    }, {
-      headers: {
-        authorization: ASSEMBLYAI_API_KEY,
-        'content-type': 'application/json',
-      },
-    });
-    const transcriptId =response.data.id;
-    let transcript = '';
-    let status= 'processing';
-    while (status === 'processing') {
-      const result = await axios.get(`https://api.assemblyai.com/v2/transcript/${transcriptId}`, {
-        headers: {
-          authorization: ASSEMBLYAI_API_KEY,
-        },
-      });
-
-      status = result.data.status;
-      if (status === 'completed') {
-        transcript = result.data.text;
-      }
-    }
-    return transcript;
+    const concatenatedText = await magic(videoUrl);
+    return concatenatedText;
   } catch (error) {
-    console.error('error getting the transcript:', error);
-    throw new Error('failed to get transcript');
+    console.error('Error getting the transcript:', error);
+    throw new Error('Failed to get transcript');
   }
 }
 
 export async function POST(req) {
   try {
-    const { videoUrl } = await req.json();
-    const transcript = await getYoutubetrancript(videoUrl);
-    return NextResponse.json({ transcript }, { status:200 });
+    const videoUrl = await req.text();
+    const concatenatedText = await getYoutubetrancript(videoUrl);
+    // const summarizedtext = await summarizeText(concatenatedText);
+    // console.log("concatenatedText: ", concatenatedText);
+
+    return NextResponse.json({ concatenatedText }, { status: 200 });
   } catch (error) {
     console.error('Error processing request:', error);
     return new NextResponse(JSON.stringify({ error: { message: error.message } }), { status: 500 });

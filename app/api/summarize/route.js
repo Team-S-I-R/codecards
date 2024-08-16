@@ -1,23 +1,25 @@
 import { NextResponse } from 'next/server';
 import axios from 'axios';
 
-const TEXTRAZOR_API_KEY = process.env.TEXTRAZOR_API_KEY;
+const tk = process.env.TEXTRAZOR_API_KEY;
 
-async function summarizeText(text) {
+export async function summarizeText(text) {
+  // console.log("text: ", text);
   try {
     const response = await axios.post('https://api.textrazor.com', new URLSearchParams({
       extractors: 'entities,topics',
       text: text,
     }), {
       headers: {
-        'x-textrazor-key': TEXTRAZOR_API_KEY,
+        'x-textrazor-key': tk,
         'content-type': 'application/x-www-form-urlencoded',
       },
     });
     const topics = response.data.response.topics.map(topic => topic.label);
+    console.log("topics: ", topics);
     return topics.join(', ');
   } catch (error) {
-    console.error('error with text summarization, blame bishtshaurya314@gmail.com:', error);
+    // console.error('error with text summarization, blame bishtshaurya314@gmail.com:', error);
     throw new Error('couldnt summarize text, blame bishtshaurya314@gmail.com:');
   }
 }

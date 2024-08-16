@@ -69,16 +69,13 @@ export default function Generate() {
     }
    };
 
-  const handleSubmit = async () => {
-    if (!text.trim()) {
-      alert("Please enter some text to generate flashcards.");
-      return;
-    }
+  const handleSubmit = async (info = {}) => {
 
     try {
+      console.log("info: ", info);
       const response = await fetch("/api/generate", {
         method: "POST",
-        body: text,
+        body: info,
       });
 
       if (!response.ok) {
@@ -86,6 +83,7 @@ export default function Generate() {
       }
 
       const data = await response.json();
+      console.log("the DATA: ", data);
       setFlashcards(data);
       // console.log(flashcards);
     } catch (error) {
@@ -95,28 +93,30 @@ export default function Generate() {
   };
 
   const handleVideoSubmit = async () => {
-    if (!videoUrl.trim()) {
-      alert("Please enter a YouTube video URL.");
-      return;
-    }
-
     
     try {
-      const response = await fetch("/api/generate", {
+
+      // youtube video stuff
+      const response = await fetch("/api/transcript", {
         method: "POST",
-        body: text,
+        body: videoUrl,
       });
 
       if (!response.ok) {
         throw new Error("Failed to generate flashcards");
       }
 
-      const data = await response.json();
-      setFlashcards(data);
+      const yttextdata = await response.json();
+
+      // ai stuff
+      console.log("starting ai stuff......");
+      handleSubmit(yttextdata.concatenatedText);
+      console.log("yttextdata", yttextdata.concatenatedText);
+      console.log("flashcards", flashcards);
       // console.log(flashcards);
+      console.log("finished ai stuff!")
     } catch (error) {
       console.error("Error generating flashcards:", error);
-      alert("An error occurred while generating flashcards. Please try again1.");
     }
   }
 
@@ -148,7 +148,7 @@ export default function Generate() {
 
         <div id="text-gen" className="w-full text-white no-scrollbar p-8 h-max overflow-y-scroll flex flex-col gap-4">
           <div className="w-full flex justify-between">
-            <h1 className="text-3xl" gutterBottom>
+            <h1 className="text-3xl" >
               Generate Flashcards
             </h1>
 
@@ -190,10 +190,10 @@ export default function Generate() {
             animate={{ opacity: 1, y: 0 }}
             transition={{
               ease: "linear",
-              duration: 1.5,
+              duration: 1.25,
             }}
             className="bg-white p-3 rounded hover:scale-105 transition-transform text-zinc-900 hover:bg-white font-bold" 
-            onClick={handleSubmit}
+            onClick={() => handleSubmit(text)}
           >
             Generate Flashcards
           </motion.button>
@@ -230,7 +230,7 @@ export default function Generate() {
             animate={{ opacity: 1, y: 0 }}
             transition={{
               ease: "linear",
-              duration: 1.5,
+              duration: 1.25,
             }}
             className="bg-white p-3 rounded hover:scale-105 transition-transform text-zinc-900 hover:bg-white font-bold" 
             onClick={handleVideoSubmit}
@@ -261,9 +261,21 @@ export default function Generate() {
 
       {flashcards.length > 0 && (
         <div className="text-white bg-zinc-900 p-4" sx={{ mt: 4 }}>
+          <div className="w-full my-5 p-8 flex place-items-center place-content-center justify-between">
           <Typography variant="h5" component="h2" gutterBottom>
             Generated Flashcards
           </Typography>
+          {flashcards.length > 0 && (
+
+<div className="bg-zinc-900 my-8 flex place-content-center h-[30vh]" sx={{ display: "flex", justifyContent: "center" }}>
+
+  <button onClick={handleOpenDialog} className="bg-white p-3 rounded hover:scale-105 transition-transform text-zinc-900 hover:bg-white font-bold" >
+  Save Flashcards
+  </button>
+
+</div>
+          )}
+          </div>
           <Grid container spacing={2}>
             {flashcards.map((flashcard, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
@@ -324,9 +336,10 @@ export default function Generate() {
 
         <div className="bg-zinc-900 my-8 flex place-content-center h-[30vh]" sx={{ display: "flex", justifyContent: "center" }}>
         
-          <button onClick={handleOpenDialog} className="bg-white h-[40px] text-zinc-900 hover:bg-white font-bold" >
+          <button onClick={handleOpenDialog} className="bg-white p-3 rounded hover:scale-105 transition-transform text-zinc-900 hover:bg-white font-bold" >
           Save Flashcards
           </button>
+
         </div>
       )}
 
