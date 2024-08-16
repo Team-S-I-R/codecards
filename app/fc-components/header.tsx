@@ -13,11 +13,10 @@ export default function FcHeader() {
 
   return (
     <>
-      <AppBar 
-        position="static" 
-        className="bg-zinc-900/70 backdrop-blur-md text-white"
+      <div 
+        className="fixed hidden sm:flex left-0 top-0 p-3 w-full bg-zinc-900/70 justify-between backdrop-blur-md text-white"
       >
-        <Toolbar className="flex justify-between items-center">
+        <Toolbar className="flex w-full justify-between items-center">
           <Typography variant="h6" className="flex-grow">
             <a href="/" className="text-white">
               Codecards
@@ -31,10 +30,12 @@ export default function FcHeader() {
             <Button color="inherit" className="hover:text-gray-300">
               <a href="/flashcards">My Flashcards</a>
             </Button>
-            <Button color="inherit" className="hover:text-gray-300">
+            {/* <Button color="inherit" className="hover:text-gray-300">
               <a href="#">My Account</a>
-            </Button>
+            </Button> */}
           </div>
+
+          
 
           <div className="flex gap-4 ml-4">
             <SignedOut>
@@ -50,14 +51,15 @@ export default function FcHeader() {
             </SignedIn>
           </div>
         </Toolbar>
-      </AppBar>
+      </div>
+
 
       {/* Mobile Header */}
-      <AppBar 
-        position="static" 
-        className="bg-zinc-900/70 backdrop-blur-md text-white sm:hidden"
+      <div 
+        className="fixed sm:hidden left-0 top-0 w-full  p-2 bg-zinc-900/70 backdrop-blur-md text-white sm:hidden"
       >
-        <Toolbar className="flex justify-between items-center">
+        <Toolbar className="flex  w-full justify-between items-center">
+          
           <Typography variant="h6" className="flex-grow">
             <a href="/" className="text-white">
               Codecards
@@ -71,9 +73,9 @@ export default function FcHeader() {
             <Button color="inherit" className="hover:text-gray-300">
               <a href="/flashcards">My Flashcards</a>
             </Button>
-            <Button color="inherit" className="hover:text-gray-300">
+            {/* <Button color="inherit" className="hover:text-gray-300">
               <a href="#">My Account</a>
-            </Button>
+            </Button> */}
           </div>
 
           <div className="flex gap-4 ml-4">
@@ -90,7 +92,7 @@ export default function FcHeader() {
             </SignedIn>
           </div>
         </Toolbar>
-      </AppBar>
+      </div>
     </>
   );
 }
