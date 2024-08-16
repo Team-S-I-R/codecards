@@ -41,7 +41,7 @@ const ResultPage = () => {
       <div className="w-screen h-screen flex flex-col place-items-center place-content-center">
       <Container maxWidth="sm" sx={{ textAlign: "center", mt: 4 }}>
         <CircularProgress />
-        <Typography variant="h6" sx={{ mt: 2 }}>
+        <Typography variant="h6" sx={{ mt: 2, color: "white" }}>
           Loading...
         </Typography>
       </Container>

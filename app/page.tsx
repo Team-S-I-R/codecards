@@ -14,10 +14,11 @@ import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 
 export default function Home() {
-  const handleSubmit = async () => {
+  const handleSubmit = async (model:String) => {
     const checkoutSession = await fetch("/api/checkout_sessions", {
       method: "POST",
-      headers: { origin: "http://localhost:3000" },
+      headers: { origin: "http://localhost:3000"},
+      body: JSON.stringify({model: model})
     });
     const checkoutSessionJson = await checkoutSession.json();
 
@@ -327,7 +328,7 @@ export default function Home() {
             </div>
 
             <button
-              onClick={handleSubmit}
+              onClick={() => handleSubmit("basic")}
               className="mt-4 py-2 px-4  rounded  bg-white hover:bg-white text-zinc-900 font-bold"
             >
                CHOOSE BASIC
@@ -353,7 +354,7 @@ export default function Home() {
             </div>
 
             <button
-              onClick={handleSubmit}
+              onClick={() => handleSubmit("pro")}
               className="mt-4 px-4 py-2 rounded bg-white  text-zinc-900 font-bold"
             >
               CHOOSE PRO
