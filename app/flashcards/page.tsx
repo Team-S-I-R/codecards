@@ -15,11 +15,12 @@ type Flashcard = {
 
 export default function Flashcard() {
   const { isLoaded, isSignedIn, user } = useUser();
-  const [flashcards, setFlashcards] = useState<Flashcard[]>([]);
+  console.log("user", user?.id, user?.emailAddresses[0]);
+  const [flashcards, setFlashcards] = useState([]);
   const router = useRouter();
 
-  const handleCardClick = (name: string) => {
-    router.push(`/flashcards/${name}`);
+  const handleCardClick = (id: string) => {
+    router.push(`/flashcard?id=${id}`);
   };
 
   useEffect(() => {
@@ -39,12 +40,11 @@ export default function Flashcard() {
 
   if (!isLoaded || !isSignedIn) {
     return (
-      <Container>
-        <Typography variant="h6" component="p">
-          Please sign in
-        </Typography>
-      </Container>
-    );
+      <>
+      <div><p>please sign in</p></div>
+    </>
+
+    )
   }
 
   return (
