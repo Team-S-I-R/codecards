@@ -1,113 +1,96 @@
-'use client'
+'use client';
 
 import * as React from 'react';
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import {
-    Typography,
-    Button,
-    AppBar,
-    Toolbar,
-    Container,
-  } from "@mui/material";
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+  Typography,
+  Button,
+  AppBar,
+  Toolbar,
+} from "@mui/material";
 
 export default function FcHeader() {
 
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-    return (
-        <>
-        <header className="hidden select-none sm:flex rounded-lg w-full bg-zinc-900/70 backdrop-blur-md text-white h-max flex p-5 place-items-center place-content-center">
-        <div className="w-1/2 flex place-items-center justify-between">
-        <div className="flex gap-8 place-items-center">
-        <Typography variant="h6" style={{ flexGrow: 1 }}>
-          <a href="/">
-          <span>  
-             Codecards
-            </span>
-          </a>
-        </Typography>
-        <button onClick={handleClick}>Menu</button>
-        <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
+  return (
+    <>
+      <AppBar 
+        position="static" 
+        className="bg-zinc-900/70 backdrop-blur-md text-white"
       >
-        <MenuItem onClick={() => setTimeout(handleClose, 1000)}><a href="/generate">Generate</a></MenuItem>
-        <MenuItem onClick={() => setTimeout(handleClose, 1000)}><a href="/flashcards">My Flashcards</a></MenuItem>
-        <MenuItem onClick={() => setTimeout(handleClose, 1000)}>My account</MenuItem>
-        <MenuItem onClick={() => setTimeout(handleClose, 1000)}>Logout</MenuItem>
-        </Menu>
-        </div>
-        <SignedOut>
+        <Toolbar className="flex justify-between items-center">
+          <Typography variant="h6" className="flex-grow">
+            <a href="/" className="text-white">
+              Codecards
+            </a>
+          </Typography>
+
           <div className="flex gap-4">
-          <Button className="bg-zinc-800 rounded-lg px-4" color="inherit" href="/sign-in">
-            Login
-          </Button>
-          <Button className="bg-white rounded-lg px-4 text-zinc-900" color="inherit" href="/sign-up">
-            Sign Up
-          </Button>
+            <Button color="inherit" className="hover:text-gray-300">
+              <a href="/generate">Generate</a>
+            </Button>
+            <Button color="inherit" className="hover:text-gray-300">
+              <a href="/flashcards">My Flashcards</a>
+            </Button>
+            <Button color="inherit" className="hover:text-gray-300">
+              <a href="#">My Account</a>
+            </Button>
           </div>
-        </SignedOut>
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
-        </div>
-        </header>
 
-        <header className="sm:hidden select-none rounded-lg w-full bg-zinc-900/70 backdrop-blur-md text-white h-max flex p-5 place-items-center justify-between">
-        <div className="flex gap-8 place-items-center">
-        <Typography variant="h6" style={{ flexGrow: 1 }}>
-          <a href="/">
-          <span>  
-             Codecards
-            </span>
-          </a>
-        </Typography>
-        <button onClick={handleClick}>Menu</button>
-        <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
+          <div className="flex gap-4 ml-4">
+            <SignedOut>
+              <Button color="inherit" className="bg-zinc-800 rounded-lg px-4">
+                <a href="/sign-in" className="text-white">Login</a>
+              </Button>
+              <Button color="inherit" className="bg-white rounded-lg px-4 text-zinc-900">
+                <a href="/sign-up">Sign Up</a>
+              </Button>
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          </div>
+        </Toolbar>
+      </AppBar>
+
+      {/* Mobile Header */}
+      <AppBar 
+        position="static" 
+        className="bg-zinc-900/70 backdrop-blur-md text-white sm:hidden"
       >
-        <MenuItem onClick={() => setTimeout(handleClose, 1000)}><a href="/generate">Generate</a></MenuItem>
-        <MenuItem onClick={() => setTimeout(handleClose, 1000)}><a href="/flashcards">My Flashcards</a></MenuItem>
-        <MenuItem onClick={()=> setTimeout(handleClose, 1000)}>My account</MenuItem>
-        <MenuItem onClick={()=> setTimeout(handleClose, 1000)}>Logout</MenuItem>
-        </Menu>
-        </div>
-        <SignedOut>
-          <Button color="inherit" href="/sign-in">
-          <span className="text-sm">  
-            Login
-          </span>
-          </Button>
-          <Button color="inherit" href="/sign-up">
-          <span className="text-sm">  
-            Sign Up
-          </span>
-          </Button>
-        </SignedOut>
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
-        </header>
-        </>
-        )
-    }
+        <Toolbar className="flex justify-between items-center">
+          <Typography variant="h6" className="flex-grow">
+            <a href="/" className="text-white">
+              Codecards
+            </a>
+          </Typography>
+
+          <div className="flex gap-4">
+            <Button color="inherit" className="hover:text-gray-300">
+              <a href="/generate">Generate</a>
+            </Button>
+            <Button color="inherit" className="hover:text-gray-300">
+              <a href="/flashcards">My Flashcards</a>
+            </Button>
+            <Button color="inherit" className="hover:text-gray-300">
+              <a href="#">My Account</a>
+            </Button>
+          </div>
+
+          <div className="flex gap-4 ml-4">
+            <SignedOut>
+              <Button color="inherit">
+                <a href="/sign-in" className="text-sm text-white">Login</a>
+              </Button>
+              <Button color="inherit">
+                <a href="/sign-up" className="text-sm">Sign Up</a>
+              </Button>
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          </div>
+        </Toolbar>
+      </AppBar>
+    </>
+  );
+}
