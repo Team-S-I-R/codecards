@@ -30,12 +30,10 @@ export default function FcHeader() {
             <Button color="inherit" className="hover:text-gray-300">
               <a href="/flashcards">My Flashcards</a>
             </Button>
-            {/* <Button color="inherit" className="hover:text-gray-300">
-              <a href="#">My Account</a>
-            </Button> */}
+            <Button color="inherit" className="hover:text-gray-300">
+              <a href="/about">About Us</a>
+            </Button>
           </div>
-
-          
 
           <div className="flex gap-4 ml-4">
             <SignedOut>
@@ -52,7 +50,6 @@ export default function FcHeader() {
           </div>
         </Toolbar>
       </div>
-
 
       {/* Mobile Header */}
       <div 
@@ -73,9 +70,9 @@ export default function FcHeader() {
             <Button color="inherit" className="hover:text-gray-300">
               <a href="/flashcards">My Flashcards</a>
             </Button>
-            {/* <Button color="inherit" className="hover:text-gray-300">
-              <a href="#">My Account</a>
-            </Button> */}
+            <Button color="inherit" className="hover:text-gray-300">
+              <a href="/about">About Us</a>
+            </Button>
           </div>
 
           <div className="flex gap-4 ml-4">

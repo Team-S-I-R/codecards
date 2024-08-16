@@ -32,10 +32,6 @@ export default function Flashcard() {
       }))
     }
 
-    if (!isLoaded || !isSignedIn) {
-      return <></>
-    }
- 
    useEffect(() => {
       async function getFlashcard() {
         if (!search || !user) return
@@ -53,6 +49,12 @@ export default function Flashcard() {
       }
       getFlashcard()
     }, [search, user])
+
+
+    if (!isLoaded || !isSignedIn) {
+      return <></>
+    }
+ 
 
     return (
       <div className="bg-zinc-900 w-full h-screen overflow-y-scroll no-scrollbar">
