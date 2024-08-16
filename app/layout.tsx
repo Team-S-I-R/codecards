@@ -6,6 +6,7 @@ import { Analytics } from "@vercel/analytics/react"
 
 const inter = Inter({ subsets: ["latin"] });
 
+// test
 export const metadata: Metadata = {
   title: "Codecards",
   description: "Study with ease",
