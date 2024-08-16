@@ -37,10 +37,10 @@ export default function FcHeader() {
 
           <div className="flex gap-4 ml-4">
             <SignedOut>
-              <Button color="inherit" className="bg-zinc-800 rounded-lg px-4">
+              <Button color="inherit" className="bg-zinc-800 hover:bg-zinc-700 hover:scale-105 rounded-lg px-4">
                 <a href="/sign-in" className="text-white">Login</a>
               </Button>
-              <Button color="inherit" className="bg-white rounded-lg px-4 text-zinc-900">
+              <Button color="inherit" className="bg-white hover:bg-white hover:scale-105 rounded-lg px-4 text-zinc-900">
                 <a href="/sign-up">Sign Up</a>
               </Button>
             </SignedOut>
@@ -77,10 +77,10 @@ export default function FcHeader() {
 
           <div className="flex gap-4 ml-4">
             <SignedOut>
-              <Button color="inherit">
-                <a href="/sign-in" className="text-sm text-white">Login</a>
+              <Button >
+                <a href="/sign-in" className="bg-zinc-800 hover:bg-zinc-700 hover:scale-105 rounded-lg px-4">Login</a>
               </Button>
-              <Button color="inherit">
+              <Button className='bg-white hover:bg-white hover:scale-105 rounded-lg px-4 text-zinc-900' >
                 <a href="/sign-up" className="text-sm">Sign Up</a>
               </Button>
             </SignedOut>
