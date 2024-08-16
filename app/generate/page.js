@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import { doc, collection, setDoc, getDoc, writeBatch } from "firebase/firestore";
 import { Container, TextField, Button, Typography, Box, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Grid, Card, CardContent, CardActionArea } from "@mui/material";
 import FcHeader from "../fc-components/header";
+import './gen.css'
+import { motion } from "framer-motion";
 
 export default function Generate() {
   const {isLoaded, isSignedIn, user} = useUser()
@@ -15,6 +17,8 @@ export default function Generate() {
   const [flipped, setFlipped] = useState([]);
   const [setName, setSetName] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [mode, setMode] = useState("Text");
+  const [videoUrl, setVideoUrl] = useState("");
   const handleOpenDialog = () => setDialogOpen(true);
   const handleCloseDialog = () => setDialogOpen(false);
   const router = useRouter();
@@ -90,7 +94,37 @@ export default function Generate() {
     }
   };
 
+  const handleVideoSubmit = async () => {
+    if (!videoUrl.trim()) {
+      alert("Please enter a YouTube video URL.");
+      return;
+    }
+
+    
+    try {
+      const response = await fetch("/api/generate", {
+        method: "POST",
+        body: text,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to generate flashcards");
+      }
+
+      const data = await response.json();
+      setFlashcards(data);
+      // console.log(flashcards);
+    } catch (error) {
+      console.error("Error generating flashcards:", error);
+      alert("An error occurred while generating flashcards. Please try again1.");
+    }
+  }
+
   const handleReset = () => {
+  }
+
+  const setVideoUrlHandler = (url) => {
+    setVideoUrl(url);
   }
 
   if (isSignedIn === false) {
@@ -99,48 +133,130 @@ export default function Generate() {
 
   return (
     <>
-    <div className="w-full h-screen  overflow-y-scroll no-scrollbar">
-    <div className="bg-zinc-900 h-screen overflow-y-scroll no-scrollbar">
+    <div className="w-screen h-screen  overflow-y-scroll no-scrollbar">
+    <div className="bg-zinc-900 h-screen overflow-y-scroll w-full no-scrollbar">
       
       <FcHeader />
 
-      <div className="w-full h-[150px]"></div>
+      <div className="w-full p-3 bg-red-500 h-[150px] text-white"></div>
 
-      <div className="text-white no-scrollbar bg-zinc-900 p-8 h-max overflow-y-scroll">
-        <Typography variant="h4" component="h1" gutterBottom>
-          Generate Flashcards
-        </Typography>
-        <textarea
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          label="Enter text"
-          multiline="true"
-          rows={4}
-          variant="outlined"
-          placeholder="Enter your text here"
-          className="w-full no-scrollbar text-white bg-zinc-900 outline-transparent border-transparent"
-          sx={{ mb: 2 }}
-        />
+      <div id="gen-container" className="flex place-items-end w-screen place-content-end flex-col">
+        <div id="steps-gen" className="text-muted-foreground place-self-end w-max flex flex-col no-scrollbar px-8 h-max">
+          <p>You are only a few steps away from your flashcards.</p>
+          <p>You can generate flashcards from text or even a <strong><em>Youtube</em></strong> video!</p>
+        </div>
 
-        <button
-          className="bg-white w-full p-3 rounded hover:scale-105 transition-transform text-zinc-900 hover:bg-white font-bold" 
-          onClick={handleSubmit}
-        >
-          Generate Flashcards
-        </button>
+        <div id="text-gen" className="w-full text-white no-scrollbar p-8 h-max overflow-y-scroll flex flex-col gap-4">
+          <div className="w-full flex justify-between">
+            <h1 className="text-3xl" gutterBottom>
+              Generate Flashcards
+            </h1>
 
-        {/* {flashcards.map((flashcard, index) => (
-                <div>
-                <div>
-                  <Typography variant="h5">{flashcard.front}</Typography>
-                </div>
-                <div>
-                  <Typography variant="h5">{flashcard.back}</Typography>
-                </div>
+            <div id="mode" className="flex flex-col gap-4">
+              <p>Mode</p>
+              <div className="w-max gap-4 flex">
+                <button onClick={() => setMode('Text')} className={mode === 'Text' ? "bg-white p-3 rounded hover:scale-105 transition-transform text-zinc-900 hover:bg-white font-bold" : "bg-zinc-900 text-white opacity-50 p-3 rounded hover:scale-105 transition-transform hover:bg-black font-bold"}>Text</button>
+                <button onClick={() => setMode('Video')} className={mode === 'Video' ? "bg-white p-3 rounded hover:scale-105 transition-transform text-zinc-900 hover:bg-white font-bold" : "bg-zinc-900 text-white p-3 opacity-50 rounded hover:scale-105 transition-transform hover:bg-black font-bold"}>Video</button>
+              </div>
             </div>
-       
-            ))} */}
+          </div>
 
+          {mode === 'Text' && (  
+          <>  
+          <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            ease: "linear",
+            duration: 1,
+          }}
+          >
+          <p>Text Mode</p>  
+          <textarea
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            label="Enter text"
+            multiline="true"
+            rows={4}
+            variant="outlined"
+            placeholder="Enter your text here"
+            className="w-full no-scrollbar text-white bg-zinc-900 outline-transparent border-transparent"
+            sx={{ mb: 2 }}
+          />
+          </motion.div>
+
+          <motion.button
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              ease: "linear",
+              duration: 1.5,
+            }}
+            className="bg-white p-3 rounded hover:scale-105 transition-transform text-zinc-900 hover:bg-white font-bold" 
+            onClick={handleSubmit}
+          >
+            Generate Flashcards
+          </motion.button>
+
+            </>
+          )}
+
+          {mode === 'Video' && (
+            <> 
+            <motion.div
+             initial={{ opacity: 0, y: 50 }}
+             animate={{ opacity: 1, y: 0 }}
+             transition={{
+               ease: "linear",
+               duration: 1,
+             }}
+            >
+              <p>Video URL Mode</p>
+              <input
+                value={videoUrl}
+                onChange={(e) => setVideoUrl(e.target.value)}
+                label="Enter video URL"
+                multiline="true"
+                rows={4}
+                variant="outlined"
+                placeholder="Enter your video URL here"
+                className="w-full no-scrollbar text-white bg-zinc-900 outline-transparent border-transparent"
+                />
+
+            </motion.div>
+
+            <motion.button
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              ease: "linear",
+              duration: 1.5,
+            }}
+            className="bg-white p-3 rounded hover:scale-105 transition-transform text-zinc-900 hover:bg-white font-bold" 
+            onClick={handleVideoSubmit}
+          >
+            Generate Flashcards
+            </motion.button>
+            </>
+          )}
+
+
+
+          {/* {flashcards.map((flashcard, index) => (
+                  <div>
+                  <div>
+                    <Typography variant="h5">{flashcard.front}</Typography>
+                  </div>
+                  <div>
+                    <Typography variant="h5">{flashcard.back}</Typography>
+                  </div>
+              </div>
+        
+              ))} */}
+
+        </div>
+
+    
       </div>
 
       {flashcards.length > 0 && (

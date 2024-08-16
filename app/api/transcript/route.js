@@ -38,7 +38,7 @@ async function getYoutubetrancript(videoUrl) {
 export async function POST(req) {
   try {
     const { videoUrl } = await req.json();
-    const transcript = await getTranscriptFromYoutube(videoUrl);
+    const transcript = await getYoutubetrancript(videoUrl);
     return NextResponse.json({ transcript }, { status:200 });
   } catch (error) {
     console.error('Error processing request:', error);
