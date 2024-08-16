@@ -1,3 +1,9 @@
+"use client"
+import { Box, CircularProgress, Container, Typography } from "@mui/material"
+import { useSearchParams } from "next/navigation"
+import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
+
 const ResultPage = () => {
    const router = useRouter()
    const searchParams = useSearchParams()
@@ -74,3 +80,5 @@ const ResultPage = () => {
     )
     
  }
+
+ export default ResultPage
