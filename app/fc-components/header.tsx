@@ -33,6 +33,9 @@ export default function FcHeader() {
             <Button color="inherit" className="hover:text-gray-300">
               <a href="/about">About Us</a>
             </Button>
+            <Button color="inherit" className="hover:text-gray-300">
+              <a href="/contact">Contact Us</a>
+            </Button>
           </div>
 
           <div className="flex gap-4 ml-4">
@@ -72,6 +75,9 @@ export default function FcHeader() {
             </Button>
             <Button color="inherit" className="hover:text-gray-300">
               <a href="/about">About Us</a>
+            </Button>
+            <Button color="inherit" className="hover:text-gray-300">
+              <a href="/contact">Contact Us</a>
             </Button>
           </div>
 

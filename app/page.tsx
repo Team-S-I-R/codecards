@@ -175,26 +175,26 @@ export default function Home() {
           {/* buttons */}
           <div className="w-max gap-5 flex h-max">
             <a href="/generate">
-          <button
-            id="f5"
-            className="mt-4 p-3 rounded bg-white hover:bg-white text-zinc-900 font-bold transform hover:scale-110 transition-transform"
-          >
-            <span id="f6">
-
-              Get Started
-            </span>
-          </button>
-          </a>
-          <button
-            id="f7"
-            className="mt-4 p-3 rounded outline outline-1 outline-whitetext-white transform hover:scale-105 transition-transform"
-          >
-            <span id="f8">
-              Learn More
-              </span>
-          </button>
+              <button
+                id="f5"
+                className="mt-4 p-3 rounded bg-white hover:bg-white text-zinc-900 font-bold transform hover:scale-110 transition-transform"
+              >
+                <span id="f6">
+                  Get Started
+                </span>
+              </button>
+            </a>
+            <a href="/about">
+              <button
+                id="f7"
+                className="mt-4 p-3 rounded outline outline-1 outline-whitetext-white transform hover:scale-105 transition-transform"
+              >
+                <span id="f8">
+                  Learn More
+                </span>
+              </button>
+            </a>
           </div>
-        
         </div>
       </div>
 

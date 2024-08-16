@@ -1,10 +1,8 @@
-'use client';
-
-import React from 'react';
+import * as React from 'react';
+import { Typography, Box, Link, Grid, Container, Avatar, Card, CardContent } from '@mui/material';
 import FcHeader from '../fc-components/header';
-import { Container, Typography, Box, Grid, Avatar, Card, CardContent } from '@mui/material';
 
-export default function About() {
+export default function ContactPage() {
   return (
     <>
       <FcHeader />
@@ -12,10 +10,10 @@ export default function About() {
       <Container maxWidth="lg" sx={{ marginTop: '100px', marginBottom: '50px' }}>
         <Box sx={{ textAlign: 'center', mb: 8 }}>
           <Typography variant="h4" gutterBottom sx={{ color: 'white' }}>
-            About Us
+            Contact Us
           </Typography>
           <Typography variant="body1" sx={{ fontSize: '18px', color: 'white' }}>
-            We are a passionate team dedicated to creating the best AI-powered flashcard studying solutions for all people, from students to professionals. This project started development in mid-August 2024. The project is a free and open-source project built on top of Clerk, Stripe, React, Next.js, TS, JS, Tailwind CSS, and Firebase.
+            For any inquiries or feedback, please feel free to reach out to us through the following:
           </Typography>
         </Box>
 
@@ -24,7 +22,7 @@ export default function About() {
             <Card sx={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}>
               <Box sx={{ display: 'flex', justifyContent: 'center', paddingTop: '20px' }}>
                 <Avatar 
-                  alt="Team Member 1"
+                  alt="Shaurya Bisht"
                   src="../shaurya.jpeg"
                   sx={{ width: 120, height: 120, border: '2px solid white' }}
                 />
@@ -33,7 +31,13 @@ export default function About() {
                 <Typography variant="h6">Shaurya Bisht</Typography>
                 <Typography variant="body2" sx={{ fontStyle: 'italic', color: 'white' }}>Position Here</Typography>
                 <Typography variant="body2" sx={{ color: 'white' }}>
-                  Shaurya!
+                  <Link href="https://www.linkedin.com/in/shaurya-bisht-6857732b1/" target="_blank" rel="noopener noreferrer" sx={{ color: 'common.white' }}>
+                    LinkedIn
+                  </Link>{' '}
+                  |{' '}
+                  <Link href="https://github.com/ssbdragonfly" target="_blank" rel="noopener noreferrer" sx={{ color: 'common.white' }}>
+                    GitHub
+                  </Link>
                 </Typography>
               </CardContent>
             </Card>
@@ -43,7 +47,7 @@ export default function About() {
             <Card sx={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}>
               <Box sx={{ display: 'flex', justifyContent: 'center', paddingTop: '20px' }}>
                 <Avatar 
-                  alt="Team Member 2"
+                  alt="Itwela Ibomu"
                   src="../itwela.jpeg"
                   sx={{ width: 120, height: 120, border: '2px solid white' }}
                 />
@@ -52,7 +56,13 @@ export default function About() {
                 <Typography variant="h6">Itwela Ibomu</Typography>
                 <Typography variant="body2" sx={{ fontStyle: 'italic', color: 'white' }}>Position Here</Typography>
                 <Typography variant="body2" sx={{ color: 'white' }}>
-                  Itwela!
+                  <Link href="https://www.linkedin.com/in/itwela/" target="_blank" rel="noopener noreferrer" sx={{ color: 'common.white' }}>
+                    LinkedIn
+                  </Link>{' '}
+                  |{' '}
+                  <Link href="https://github.com/itwela" target="_blank" rel="noopener noreferrer" sx={{ color: 'common.white' }}>
+                    GitHub
+                  </Link>
                 </Typography>
               </CardContent>
             </Card>
@@ -62,21 +72,47 @@ export default function About() {
             <Card sx={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}>
               <Box sx={{ display: 'flex', justifyContent: 'center', paddingTop: '20px' }}>
                 <Avatar 
-                  alt="Team Member 3"
+                  alt="Rehan Mohideen"
                   src="../rehan.jpeg"
                   sx={{ width: 120, height: 120, border: '2px solid white' }}
                 />
               </Box>
               <CardContent sx={{ textAlign: 'center', color: 'white' }}>
-                <Typography variant="h6">Rehan Mohideen</Typography>
+                <Typography variant="h6">Bob Johnson</Typography>
                 <Typography variant="body2" sx={{ fontStyle: 'italic', color: 'white' }}>Position Here</Typography>
                 <Typography variant="body2" sx={{ color: 'white' }}>
-                    Rehan!
+                  <Link href="https://www.linkedin.com/in/rehan-nagoor-mohideen-6b3156202/" target="_blank" rel="noopener noreferrer" sx={{ color: 'common.white' }}>
+                    LinkedIn
+                  </Link>{' '}
+                  |{' '}
+                  <Link href="https://github.com/rehan-code" target="_blank" rel="noopener noreferrer" sx={{ color: 'common.white' }}>
+                    GitHub
+                  </Link>
                 </Typography>
               </CardContent>
             </Card>
           </Grid>
         </Grid>
+
+        <Box sx={{ mt: 8 }}>
+          <Typography variant="h6" gutterBottom sx={{ color: 'white', textAlign: 'center' }}>
+            Email Us
+          </Typography>
+          <Typography variant="body1" sx={{ color: 'white', textAlign: 'center' }}>
+            <Link href="mailto:bishtshaurya314@gmail.com" sx={{ color: 'common.white' }}>
+              bishtshaurya314@gmail.com
+            </Link>
+          </Typography>
+
+          <Typography variant="h6" gutterBottom sx={{ color: 'white', textAlign: 'center', mt: 4 }}>
+            Project GitHub Repository
+          </Typography>
+          <Typography variant="body1" sx={{ color: 'white', textAlign: 'center' }}>
+            <Link href="https://github.com/Team-S-I-R/codecards" target="_blank" rel="noopener noreferrer" sx={{ color: 'common.white' }}>
+              https://github.com/Team-S-I-R/codecards
+            </Link>
+          </Typography>
+        </Box>
       </Container>
     </>
   );
