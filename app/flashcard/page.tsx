@@ -53,7 +53,7 @@ export default function Flashcard() {
     }, [search, user])
 
 
-    if (!isLoaded || !isSignedIn) {
+    if (!isLoaded || isSignedIn === false) {
       router.push('/sign-in')
     }
  

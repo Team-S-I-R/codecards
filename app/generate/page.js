@@ -93,9 +93,9 @@ export default function Generate() {
   const handleReset = () => {
   }
 
-  if (!isSignedIn) {
+  if (isSignedIn === false) {
     router.push('/sign-in')
-  }
+  } 
 
   return (
     <>
@@ -103,6 +103,8 @@ export default function Generate() {
     <div className="bg-zinc-900 h-screen overflow-y-scroll no-scrollbar">
       
       <FcHeader />
+
+      <div className="w-full h-[150px]"></div>
 
       <div className="text-white no-scrollbar bg-zinc-900 p-8 h-max overflow-y-scroll">
         <Typography variant="h4" component="h1" gutterBottom>
@@ -123,7 +125,6 @@ export default function Generate() {
         <button
           className="bg-white w-full p-3 rounded hover:scale-105 transition-transform text-zinc-900 hover:bg-white font-bold" 
           onClick={handleSubmit}
-          fullWidth
         >
           Generate Flashcards
         </button>
@@ -250,4 +251,5 @@ export default function Generate() {
     </div>
       </>
   );
+
 }

@@ -38,7 +38,7 @@ export default function Flashcard() {
     getFlashcards();
   }, [user]);
 
-  if (!isLoaded || !isSignedIn) {
+  if (isSignedIn === false) {
     router.push('/sign-in')
   }
 
@@ -47,9 +47,12 @@ export default function Flashcard() {
       <div className="fc-page-div w-full h-screen bg-black overflow-y-scroll no-scrollbar">
         <FcHeader />
 
-        <Container className="p-8">
+        <Container className="p-8 w-full h-full">
+
+          <div className="w-full h-[150px]"></div>
+
           <Typography variant="h4" component="h1" gutterBottom className="text-white">
-            Your Flashcards
+            Your Flashcard Sets
           </Typography>
 
           {flashcards.length > 0 ? (
