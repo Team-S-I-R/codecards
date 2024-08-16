@@ -21,7 +21,7 @@ export default function RootLayout({
     <ClerkProvider>
     <html lang="en" className="overflow-hidden">
       {/* <html lang="en" className=""> */}
-        <body className={`${inter.className} bg-zinc-900`}>{children}</body>
+        <body className={`${inter.className} bg-zinc-900`}>{children} <Analytics /></body>
       </html>
     </ClerkProvider>
   );
