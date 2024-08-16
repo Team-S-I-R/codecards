@@ -3,6 +3,7 @@ import { Box, CircularProgress, Container, Typography } from "@mui/material";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import FcHeader from "../fc-components/header";
 
 const ResultPage = () => {
   const router = useRouter();
@@ -37,12 +38,14 @@ const ResultPage = () => {
 
   if (loading) {
     return (
+      <div className="w-screen h-screen flex flex-col place-items-center place-content-center">
       <Container maxWidth="sm" sx={{ textAlign: "center", mt: 4 }}>
         <CircularProgress />
         <Typography variant="h6" sx={{ mt: 2 }}>
           Loading...
         </Typography>
       </Container>
+      </div>
     );
   }
 
@@ -57,30 +60,38 @@ const ResultPage = () => {
   }
 
   return (
+  <>
+    <FcHeader />
 
-    <Container maxWidth="sm" sx={{ textAlign: "center", mt: 4 }}>
-      {session.payment_status === "paid" ? (
-        <>
-          <Typography variant="h4">Thank you for your purchase!</Typography>
-          <Box sx={{ mt: 2 }}>
-            <Typography variant="h6">Session ID: {session_id}</Typography>
-            <Typography variant="body1">
-              We have received your payment. You will receive an email with the
-              order details shortly.
-            </Typography>
-          </Box>
-        </>
-      ) : (
-        <>
-          <Typography variant="h4">Payment failed</Typography>
-          <Box sx={{ mt: 2 }}>
-            <Typography variant="body1">
-              Your payment was not successful. Please try again.
-            </Typography>
-          </Box>
-        </>
-      )}
-    </Container>
+      <Container maxWidth="sm" sx={{ textAlign: "center", mt: 4 }}>
+
+        {session.payment_status === "paid" ? (
+          <>
+            <div className="w-screen h-screen flex flex-col place-items-center place-content-center text-white">
+            <Typography variant="h4">Thank you for your purchase!</Typography>
+            <Box sx={{ mt: 2 }}>
+              <Typography variant="h6">Session ID: {session_id}</Typography>
+              <Typography variant="body1">
+                We have received your payment. You will receive an email with the
+                order details shortly.
+              </Typography>
+            </Box>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="w-screen h-screen flex flex-col place-items-center place-content-center text-white">
+            <Typography variant="h4">Payment failed</Typography>
+            <Box sx={{ mt: 2 }}>
+              <Typography variant="body1">
+                Your payment was not successful. Please try again.
+              </Typography>
+            </Box>
+          </div>
+          </>
+        )}
+      </Container>
+  </>
   );
 };
 
