@@ -312,7 +312,7 @@ export default function Home() {
               Basic
             </Typography>
             
-            <span className="text-muted-foreground">Everything in Basic plus you're supporting the team!</span>
+            <span className="text-muted-foreground">Everything in Basic plus you are supporting the team!</span>
 
             <div className="w-full h-max p-5 bg-black my-5 rounded-xl flex place-content-center place-items-center">
               <Typography
